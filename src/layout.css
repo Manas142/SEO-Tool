@@ -1,0 +1,43 @@
+.layout-body {
+  padding: 16px;
+}
+
+.links {
+  display: flex;
+}
+
+.links a {
+  color: black;
+  text-decoration: none;
+  padding: 10px 16px;
+  border: 1px solid black;
+  min-width: 10%;
+}
+.links a {
+  text-align: center;
+}
+.links a.active {
+  background-color: black;
+  color: white;
+}
+
+.links a:hover {
+  border: 1px solid gray;
+  background-color: black;
+  color: white;
+}
+
+@media only screen and (max-width: 768px) {
+  .links {
+    display: flex;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+  }
+  .links a:first-child {
+    text-align: center;
+    width: 100%;
+  }
+  .links a {
+    width: 50%;
+  }
+}

@@ -1,0 +1,163 @@
+/* ScrapeBar.css */
+/* Assuming ScrapeBar is a direct child of body and takes full width */
+.scrape-bar {
+  width: 100%;
+  padding: 4rem;
+  height: 100vh;
+  box-sizing: border-box;
+  text-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.scrape-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  font-size: 4rem; /* Adjust size as per your design */
+  /* margin-top: 20rem; */
+  flex-grow: 1;
+  margin-bottom: 2rem;
+  /* margin-right: 50rem; */
+  text-align: start;
+}
+
+.scrape-input-group {
+  /* margin: auto; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100rem; /* Adjust width as per your design */
+}
+
+.scrape-input {
+  flex-grow: 1;
+  padding: 0.8rem;
+  margin-right: 0.5rem;
+  border: 2px solid #2d2d2d; /* Purple border */
+  border-radius: 5px;
+  color: #2d2d2d;
+}
+
+.btn-Generate {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.8rem 1.5rem;
+  border: 2px solid #2d2d2d;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  background-color: #2d2d2d; /* Purple button */
+  color: #fff;
+}
+@keyframes progress-bar-stripes {
+  0% {
+    background-position-x: -10rem;
+  }
+  to {
+    background-position-x: 0rem;
+  }
+}
+.btn-Generate.loading {
+  background: repeating-linear-gradient(
+    45deg,
+    #222222,
+    #222222 10px,
+    #333333 10px,
+    #333333 20px
+  );
+  animation: 1s linear infinite progress-bar-stripes;
+}
+.btn-Generate .arrow {
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.btn-Generate:disabled {
+  background-color: #4e4e4e; /* Disabled button color */
+}
+
+.btn-Generate:not(:disabled):hover {
+  background-color: #2d2d2d; /* Lighter purple on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .scrape-input,
+  .btn-Generate {
+    width: auto; /* Adjust to auto for better flexibility */
+    margin: 0.5rem; /* Adjusted margin for spacing */
+  }
+
+  .scrape-input-group {
+    flex-direction: column;
+  }
+}
+
+.btn-Generate:hover .arrow {
+  transform: translateX(0.25rem); /* Move arrow to the left on hover */
+}
+
+.scrape-subtitle {
+  position: relative; /* or 'fixed' if you want it to stay in place on scroll */
+  top: 3;
+  left: 0;
+  width: 100%;
+  flex-grow: 1;
+}
+.scrape-subtitle p img {
+  width: 50px;
+  object-fit: contain;
+}
+
+.scrape-subtitle p {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  /* margin-right: 65rem; */
+  padding: 10px 0; /* Example padding, adjust as needed */
+  font-size: 18px; /* Example font size, adjust as needed */
+  font-weight: bold;
+  color: #2d2d2d; /* Example color, adjust as needed */
+}
+
+.errorText {
+  color: red;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 500;
+  padding: 10px 0px;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 768px) {
+  .scrape-bar {
+    padding: 2rem;
+    box-sizing: border-box;
+    text-align: center;
+    justify-content: space-around;
+    color: white;
+  }
+
+  .scrape-header img {
+    right: 0% !important;
+  }
+  .scrape-input-group {
+    align-items: stretch;
+  }
+  .scrape-header {
+    text-align: center;
+    flex-grow: 0;
+    font-size: 2rem;
+  }
+}
+
+.scrape-input:active,
+.scrape-input:focus {
+  outline: 1px solid black; /* or none */
+}

@@ -1,0 +1,33 @@
+/* src/index.css */
+
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+/* App.css */
+body {
+  font-family: "Roboto", sans-serif !important;
+  margin: 0;
+  padding: 0;
+  background-color: #fff; /* Dark background */
+  color: #2d2d2d;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.card-content-detail::-webkit-scrollbar,
+.tabContent::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.card-content-detail::-webkit-scrollbar-track,
+.tabContent::-webkit-scrollbar-track {
+  /* box-shadow: inset 0 0 5px grey; */
+  border-radius: 10px;
+  /* background-color: #d2d2d220; */
+}
+
+/* Handle */
+.tabContent::-webkit-scrollbar-thumb,
+.card-content-detail::-webkit-scrollbar-thumb {
+  background: black;
+  border-radius: 5px;
+}
