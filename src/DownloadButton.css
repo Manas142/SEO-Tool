@@ -1,0 +1,60 @@
+.download-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 0.8rem 1.5rem;
+  border: 2px solid #2d2d2d;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  background-color: #2d2d2d; /* Match ScrapeBar button background color */
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.download-button:hover {
+  background-color: #4e4e4e; /* Match ScrapeBar button hover color */
+}
+
+.download-button:disabled {
+  background-color: #4e4e4e; /* Disabled button color */
+}
+
+@keyframes progress-bar-stripes {
+  0% {
+    background-position-x: -10rem;
+  }
+  to {
+    background-position-x: 0rem;
+  }
+}
+
+.download-button.loading {
+  background: repeating-linear-gradient(
+    45deg,
+    #222222,
+    #222222 10px,
+    #333333 10px,
+    #333333 20px
+  );
+  animation: 1s linear infinite progress-bar-stripes;
+}
+
+.download-button .arrow {
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.download-button:hover .arrow {
+  transform: translateX(0.25rem); /* Move arrow to the left on hover */
+}
+
+@media (max-width: 768px) {
+  .download-button {
+    width: auto; /* Adjust to auto for better flexibility */
+    margin: 0.5rem; /* Adjusted margin for spacing */
+  }
+}

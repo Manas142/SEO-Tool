@@ -1,14 +1,32 @@
-import React, { useState } from "react";
-import MyContext from "./context";
+// import React, { useState } from "react";
+// import MyContext from "./context";
 
+
+// const ContextProvider = ({ children }) => {
+//   const [value, setValue] = useState();
+
+//   return (
+//     <MyContext.Provider value={{ value, setValue }}>
+//       {children}
+//     </MyContext.Provider>
+//   );
+// };
+
+// export default ContextProvider;
+
+import React, { useState } from "react";
+import appContext from "./context";
 
 const ContextProvider = ({ children }) => {
-  const [value, setValue] = useState();
+  const [value, setValue] = useState({
+    scrapedData: null,
+    // Add other initial values if needed
+  });
 
   return (
-    <MyContext.Provider value={{ value, setValue }}>
+    <appContext.Provider value={{ value, setValue }}>
       {children}
-    </MyContext.Provider>
+    </appContext.Provider>
   );
 };
 
