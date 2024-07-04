@@ -1,18 +1,16 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import appContext from '../context';
 import '../DownloadButton.css'; // Adjust the path to the correct location
-import DownloadModal from './DownloadModal'; // Import the modal component
 
 // Import tooltipMap from constants.js
 import { tooltipMap } from '../constants'; // Adjust the path to constants.js
 
 const DownloadButton = () => {
   const { value } = useContext(appContext);
-  const [showModal, setShowModal] = useState(false);
 
-  const downloadReport = (format) => {
+  const downloadReport = () => {
     const data = value.scrapedData;
 
     if (!data) {
@@ -64,97 +62,67 @@ const DownloadButton = () => {
       { title: 'Desktop Total Blocking Time', value: data.desktopPerformance.totalBlockingTime },
     ];
 
-    if (format === 'csv') {
-      let csvContent = "data:text/csv;charset=utf-8,";
-      csvContent += "Title,Value\n";
-      reportData.forEach(row => {
-        csvContent += `${row.title},${row.value}\n`;
-      });
+    const additionalInfo = Object.entries(tooltipMap).map(([key, value]) => ({
+      title: key,
+      value: value,
+    }));
 
-      csvContent += "\nWatermark: Chimpzlab";
+    const doc = new jsPDF();
 
-      const encodedUri = encodeURI(csvContent);
-      const link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", "seo_report.csv");
-      document.body.appendChild(link);
+    // Add watermark text on each page
+    const watermark = (doc) => {
+      const totalPages = doc.internal.getNumberOfPages();
+      for (let i = 1; i <= totalPages; i++) {
+        doc.setPage(i);
+        doc.setFontSize(60);
+        doc.setTextColor(230); // Light grey color to simulate transparency
+        doc.text('Chimpzlab', doc.internal.pageSize.width / 1.7, doc.internal.pageSize.height / 1.4, {
+          align: 'center',
+          angle: 45,
+        });
+      }
+    };
 
-      link.click();
-      document.body.removeChild(link);
-    } else if (format === 'pdf') {
-      const doc = new jsPDF();
+    // Add branding text
+    doc.setFontSize(20);
+    doc.setTextColor(0);
+    doc.text("SEO Performance Report", 20, 40);
 
-      // Add watermark text on each page
-      const watermark = (doc) => {
-        const totalPages = doc.internal.getNumberOfPages();
-        for (let i = 1; i <= totalPages; i++) {
-          doc.setPage(i);
-          doc.setFontSize(60);
-          doc.setTextColor(230); // Light grey color to simulate transparency
-          doc.text('Chimpzlab', doc.internal.pageSize.width / 2, doc.internal.pageSize.height / 2, {
-            align: 'center',
-            angle: 45,
-          });
-        }
-      };
+    // Add watermark before adding the table
+    watermark(doc);
 
-      // Add branding text
-      doc.setFontSize(20);
-      doc.setTextColor(0);
-      doc.text("SEO Performance Report", 20, 40);
+    // Add table
+    const tableData = reportData.map(row => [row.title, row.value]);
+    doc.autoTable({
+      startY: 50,
+      head: [['Title', 'Value']],
+      body: tableData,
+      didDrawPage: (data) => {
+        watermark(doc);
+      },
+    });
 
-      // Add watermark before adding the table
-      watermark(doc);
+    // Add new page for additional info
+    doc.addPage();
+    doc.setFontSize(20);
+    doc.setTextColor(0);
+    doc.text("Additional Information", 20, 30);
 
-      // Add table
-      const tableData = reportData.map(row => [row.title, row.value]);
-      doc.autoTable({
-        startY: 50,
-        head: [['Title', 'Value']],
-        body: tableData,
-        didDrawPage: (data) => {
-          watermark(doc);
-        },
-      });
+    // Add additional info table
+    doc.autoTable({
+      startY: 40,
+      head: [['Title', 'Description']],
+      body: additionalInfo.map(info => [info.title, info.value]),
+    });
 
-      // Add new page for additional info
-      doc.addPage();
-      doc.setFontSize(20);
-      doc.setTextColor(0);
-      doc.text("Additional Information", 20, 30);
-
-      // Add additional info table
-      const additionalInfo = Object.entries(tooltipMap).map(([key, value]) => ({
-        title: key,
-        value: value,
-      }));
-
-      doc.autoTable({
-        startY: 40,
-        head: [['Title', 'Description']],
-        body: additionalInfo.map(info => [info.title, info.value]),
-      });
-
-      // Save the PDF
-      doc.save('seo_report.pdf');
-    }
+    // Save the PDF
+    doc.save('seo_report.pdf');
   };
 
   return (
-    <>
-      <button onClick={() => setShowModal(true)} className="download-button">
-        Download Report 
-      </button>
-      {showModal && (
-        <DownloadModal 
-          onClose={() => setShowModal(false)} 
-          onDownload={(format) => {
-            downloadReport(format);
-            setShowModal(false);
-          }} 
-        />
-      )}
-    </>
+    <button onClick={downloadReport} className="download-button">
+      Download Report 
+    </button>
   );
 };
 
