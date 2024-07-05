@@ -7,7 +7,6 @@ import MobilePerformance from './components/MobilePerformance';
 import DesktopPerformance from './components/DesktopPerformance';
 import { LayoutComponent } from './Layout';
 import DownloadButton from './components/DownloadButton'; // Import the DownloadButton
-import './DownloadButton.css'; // Adjust the path to the correct location
 import ContextProvider from './ContextProvider'; // Import the ContextProvider
 
 function App() {
