@@ -98,8 +98,8 @@ export default function ScrapeBar() {
     <div className="scrape-bar">
       <div className="scrape-subtitle">
         <p>
-          <img src="./chimlogo.png" alt="" />
-          Chimpzlab Website Audit
+          <img src="" alt="" />
+           Website Audit
         </p>
       </div>
       <div>
@@ -112,7 +112,7 @@ export default function ScrapeBar() {
               zIndex: "-1",
               height: "100%",
             }}
-            src="./chimp.png" alt="" />
+            src="" alt="" />
           <div>Let's Deep Dive</div>
           <div>into your website!</div>
         </div>
@@ -120,7 +120,7 @@ export default function ScrapeBar() {
           <input
             className="scrape-input"
             type="url"
-            placeholder="https://chimpzlab.com"
+            placeholder="https://something.com"
             aria-label="URL"
             value={url}
             name="scrape-url"

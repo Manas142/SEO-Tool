@@ -76,7 +76,7 @@ const DownloadButton = () => {
         doc.setPage(i);
         doc.setFontSize(60);
         doc.setTextColor(230); // Light grey color to simulate transparency
-        doc.text('Chimpzlab', doc.internal.pageSize.width / 1.7, doc.internal.pageSize.height / 1.4, {
+        doc.text('Manas', doc.internal.pageSize.width / 1.7, doc.internal.pageSize.height / 1.4, {
           align: 'center',
           angle: 45,
         });

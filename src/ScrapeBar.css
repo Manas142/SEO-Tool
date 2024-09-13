@@ -115,8 +115,8 @@
 
 .scrape-subtitle p {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  text-align: start !important;
+  /* gap: 10px; */
   margin: 0;
   /* margin-right: 65rem; */
   padding: 10px 0; /* Example padding, adjust as needed */
